@@ -1,10 +1,2 @@
-<router-outlet></router-outlet>
-<div>this is static prop: {{ title }}</div>
-<app-button></app-button>
-<app-input></app-input>
-<div>
-  <app-image></app-image>
-</div>
-<div>
-  <app-modal></app-modal>
-</div>
+<app-list></app-list>
+<app-button [buttonTitle]="'observable'" (buttonClick)="test()"></app-button>

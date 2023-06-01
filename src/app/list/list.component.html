@@ -1,0 +1,10 @@
+<p>{{ list | json }}</p>
+<ul>
+  <li *ngFor="let element of list">{{ element }}</li>
+</ul>
+<app-input
+  (todoEmitter)="addTodo($event)"
+  (removeTodoEmitter)="removeTodo($event)"
+></app-input>
+<app-button [buttonTitle]="'pop-todo'" (buttonClick)="popTodo()"></app-button>
+<app-button [buttonTitle]="'save'" (buttonClick)="save()"></app-button>

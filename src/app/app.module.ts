@@ -4,13 +4,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InputComponent } from './input/input.component';
 import { ButtonComponent } from './button/button.component';
-import { ImageComponent } from './image/image.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ModalComponent } from './modal/modal.component';
+import { FormsModule } from '@angular/forms';
+import { ListComponent } from './list/list.component';
 
 @NgModule({
-  declarations: [AppComponent, InputComponent, ButtonComponent, ImageComponent, ModalComponent],
-  imports: [BrowserModule, NgbModule, AppRoutingModule],
+  declarations: [AppComponent, InputComponent, ButtonComponent, ListComponent],
+  imports: [BrowserModule, NgbModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -1,1 +1,11 @@
-<input type="text" id="sample-input" />
+<input type="text" [(ngModel)]="inputValue" name="todo-input" />
+<app-button
+  [buttonTitle]="'add-todo'"
+  [inputValue]="inputValue"
+  (buttonClick)="emitTodo($event)"
+></app-button>
+<app-button
+  [buttonTitle]="'remove-todo'"
+  [inputValue]="inputValue"
+  (buttonClick)="removeTodo($event)"
+></app-button>
