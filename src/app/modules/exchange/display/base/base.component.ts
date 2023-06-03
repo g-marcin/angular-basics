@@ -21,11 +21,5 @@ export class BaseComponent {
   setSelectValue(e: any) {
     this.baseCurrency = e.target.value;
     this.currencyService.updateBaseCurrency(this.baseCurrency);
-    console.log(this.currencyService);
-    const subscription = this.currencyService.baseCurrency$.subscribe(
-      async (value) => {
-        this.serviceCurrency = await value;
-      }
-    );
   }
 }

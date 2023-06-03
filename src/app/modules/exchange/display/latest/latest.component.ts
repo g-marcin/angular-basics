@@ -8,11 +8,17 @@ import { CurrencyService } from 'src/app/services/CurrencyService/currency.servi
 })
 export class LatestComponent {
   presentCurrency = '';
+  baseCurrency = '';
   constructor(private currencyService: CurrencyService) {}
 
   presentCurrencySubscription = this.currencyService.presentCurrency$.subscribe(
     (value) => {
       this.presentCurrency = value;
+    }
+  );
+  baseCurrencySubscription = this.currencyService.baseCurrency$.subscribe(
+    (value) => {
+      this.baseCurrency = value;
     }
   );
 }
