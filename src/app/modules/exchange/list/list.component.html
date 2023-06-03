@@ -1,0 +1,11 @@
+<p>----LIST:</p>
+
+<ul class="unstyled">
+  <li *ngFor="let element of currencyNames">
+    <app-currency-item
+      [element]="element"
+      [currencyRate]="getCurrencyRate(element)"
+      (buttonClickEmitter)="currencyButtonHandler($event)"
+    ></app-currency-item>
+  </li>
+</ul>
