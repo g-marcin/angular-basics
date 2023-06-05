@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { LocalStorageService } from '../LocalStorageService/local-storage.service';
 
@@ -8,8 +8,6 @@ import { LocalStorageService } from '../LocalStorageService/local-storage.servic
 })
 export class CurrencyService {
   baseURL = 'https://api.frankfurter.app/';
-
-  ngOnInit() {}
 
   private presentCurrencySubject: BehaviorSubject<string> =
     new BehaviorSubject<string>(
