@@ -1,23 +1,14 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
-import { ListComponent } from './modules/exchange/list/list.component';
-import { HttpClientModule } from '@angular/common/http';
-import { DisplayComponent } from './modules/exchange/display/display.component';
-import { HistoryComponent } from './modules/exchange/display/history/history.component';
-import { BaseComponent } from './modules/exchange/display/base/base.component';
-import { LatestComponent } from './modules/exchange/display/latest/latest.component';
-import { CurrencyItemComponent } from './modules/exchange/list/currency-item/currency-item.component';
-import { ExchangeComponent } from './modules/exchange/exchange.component';
-import { AdminComponent } from './modules/admin/admin.component';
-import { DetailsComponent } from './modules/details/details.component';
-import { HeaderComponent } from './layout/header/header.component';
-import { FooterComponent } from './layout/footer/footer.component';
-import { HistoryItemComponent } from './modules/exchange/display/history/history-item/history-item.component';
 import { CountryFlagComponent } from './components/country-flag/country-flag.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { HeaderComponent } from './layout/header/header.component';
+import { AdminComponent, BaseComponent, CurrencyItemComponent, DetailsComponent, DisplayComponent, ExchangeComponent, HistoryComponent, HistoryItemComponent, LatestComponent, ListComponent } from './modules';
 
 @NgModule({
   declarations: [

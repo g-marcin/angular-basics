@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { CurrencyService } from 'src/app/services/CurrencyService/currency.service';
 import { HistoryService } from 'src/app/services/HistoryService/history.service';
 
@@ -11,28 +12,27 @@ export class HistoryComponent {
   currencyHistory = [['', 0]];
   presentCurrency = '';
   baseCurrency = '';
+  $subs:Subscription = new Subscription()
   constructor(
     private historyService: HistoryService,
     private currencyService: CurrencyService
   ) {}
 
-  presentCurrencySubscription = this.currencyService.presentCurrency$.subscribe(
+  ngOnInit(): void {
+  this.fetchHistoryData();
+   this.$subs.add(this.currencyService.presentCurrency$.subscribe(
     (value) => {
       this.presentCurrency = value;
       this.fetchHistoryData();
     }
-  );
-  baseCurrencySubscription = this.currencyService.baseCurrency$.subscribe(
+  )) 
+  this.$subs.add(  this.currencyService.baseCurrency$.subscribe(
     (value) => {
       this.baseCurrency = value;
       this.fetchHistoryData();
     }
-  );
-
-  ngOnInit(): void {
-    this.fetchHistoryData();
+  )) 
   }
-
   fetchHistoryData() {
     this.historyService
       .getCurrencyHistory(this.baseCurrency)
@@ -45,5 +45,8 @@ export class HistoryComponent {
           .reverse();
         this.currencyHistory = result;
       });
+  }
+  ngOnDestroy(){
+    this.$subs.unsubscribe
   }
 }
