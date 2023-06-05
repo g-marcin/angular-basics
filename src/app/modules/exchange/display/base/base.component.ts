@@ -17,7 +17,6 @@ export class BaseComponent {
       this.currencyCodes = Object.entries(currencies);
     });
   }
-
   setSelectValue(e: any) {
     this.baseCurrency = e.target.value;
     this.currencyService.updateBaseCurrency(this.baseCurrency);

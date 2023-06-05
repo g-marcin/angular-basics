@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { format, subDays } from 'date-fns';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CurrencyService {
   baseURL = 'https://api.frankfurter.app/';
-  presentCurrency = 'USD';
 
   private presentCurrencySubject: BehaviorSubject<string> =
     new BehaviorSubject<string>('AUD');
@@ -18,29 +16,25 @@ export class CurrencyService {
     new BehaviorSubject<string>('USD');
   public baseCurrency$ = this.baseCurrencySubject.asObservable();
 
-  constructor(private httpClient: HttpClient) {}
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-type': 'application/json',
-      Key: '',
-    }),
-  };
+  private presentToBaseSubject: BehaviorSubject<string> =
+    new BehaviorSubject<string>('');
+  public presentToBase$ = this.presentToBaseSubject.asObservable();
 
+  constructor(private httpClient: HttpClient) {}
+
+  //names and latest fetchers
   getCurrencyNames() {
-    //TODO:type the currencies response
     return this.httpClient.get<{ [k: string]: string }>(
-      `${this.baseURL}currencies`,
-      {
-        headers: this.httpOptions.headers,
-      }
+      `${this.baseURL}currencies`
     );
   }
-  getCurrencies() {
-    //TODO:type the latest response
-    return this.httpClient.get<any>(`${this.baseURL}latest`, {
-      headers: this.httpOptions.headers,
-    });
+  getCurrencies(baseCurrency: string) {
+    return this.httpClient.get<any>(
+      `${this.baseURL}latest?from=${baseCurrency}`
+    );
   }
+
+  //buttons and select handlers
   updatePresentCurrency(currencyCode: string) {
     this.presentCurrencySubject.next(currencyCode);
   }

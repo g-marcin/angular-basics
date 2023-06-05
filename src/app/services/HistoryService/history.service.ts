@@ -9,27 +9,15 @@ import { format, subDays } from 'date-fns';
 export class HistoryService {
   baseURL = 'https://api.frankfurter.app/';
 
-  private currencyHistorySubject: BehaviorSubject<string> =
-    new BehaviorSubject<string>('USD');
-  public currencyHistory$ = this.currencyHistorySubject.asObservable();
   constructor(private httpClient: HttpClient) {}
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-type': 'application/json',
-      Key: '',
-    }),
-  };
 
-  getCurrencyHistory() {
+  getCurrencyHistory(baseCurrency: string) {
     //TODO:type the history response
     const date = new Date();
     const dateFrom = format(date, 'yyyy-MM-dd');
     const dateTo = format(subDays(date, 12), 'yyyy-MM-dd');
     return this.httpClient.get<any>(
-      `${this.baseURL}${dateTo}..${dateFrom}?from=${'PLN'}`,
-      {
-        headers: this.httpOptions.headers,
-      }
+      `${this.baseURL}${dateTo}..${dateFrom}?from=${baseCurrency}`
     );
   }
 }

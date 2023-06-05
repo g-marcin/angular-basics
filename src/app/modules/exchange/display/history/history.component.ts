@@ -10,6 +10,7 @@ import { HistoryService } from 'src/app/services/HistoryService/history.service'
 export class HistoryComponent {
   currencyHistory = {};
   presentCurrency = '';
+  baseCurrency = '';
   constructor(
     private historyService: HistoryService,
     private currencyService: CurrencyService
@@ -21,20 +22,28 @@ export class HistoryComponent {
       this.fetchHistoryData();
     }
   );
+  baseCurrencySubscription = this.currencyService.baseCurrency$.subscribe(
+    (value) => {
+      this.baseCurrency = value;
+      this.fetchHistoryData();
+    }
+  );
 
   ngOnInit(): void {
     this.fetchHistoryData();
   }
 
   fetchHistoryData() {
-    this.historyService.getCurrencyHistory().subscribe((currencies) => {
-      const result = Object.entries(currencies.rates).map(
-        ([date, rates]: [any, any]) => {
-          let presentCurrencyRate = rates[this.presentCurrency];
-          return [date, presentCurrencyRate];
-        }
-      );
-      this.currencyHistory = result;
-    });
+    this.historyService
+      .getCurrencyHistory(this.baseCurrency)
+      .subscribe((currencies) => {
+        const result = Object.entries(currencies.rates).map(
+          ([date, rates]: [any, any]) => {
+            let presentCurrencyRate = rates[this.presentCurrency];
+            return [date, presentCurrencyRate];
+          }
+        );
+        this.currencyHistory = result;
+      });
   }
 }
