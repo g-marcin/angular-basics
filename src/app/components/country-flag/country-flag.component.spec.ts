@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CountryFlagComponent } from './country-flag.component';
 
 describe('CountryFlagComponent', () => {
@@ -8,7 +7,7 @@ describe('CountryFlagComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CountryFlagComponent]
+      declarations: [CountryFlagComponent],
     });
     fixture = TestBed.createComponent(CountryFlagComponent);
     component = fixture.componentInstance;
