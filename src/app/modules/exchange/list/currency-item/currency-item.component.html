@@ -1,7 +1,7 @@
 <button class="currency__Button" (click)="emitValues()">
   <span class="code">{{ element[0] }}</span>
   <span class="image">
-    <img src="{{ imageSrc }}" alt="" />
+    <app-country-flag [flagSrc]="flagSrc"></app-country-flag>
   </span>
   <span class="name">{{ element[1] }}</span>
   <span class="rate">{{ currencyRate }}</span>

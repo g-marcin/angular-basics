@@ -13,9 +13,7 @@ export class AdminComponent {
     private localStorageService: LocalStorageService
   ) {}
   defaultCurrency = 'AUD';
-
-  currencyCodes: any = [];
-
+  currencyCodes = [['', '']];
   ngOnInit(): void {
     this.currencyService.getCurrencyNames().subscribe((currencies) => {
       this.currencyCodes = Object.entries(currencies);
@@ -24,7 +22,6 @@ export class AdminComponent {
   setSelectValue(e: any) {
     this.defaultCurrency = e.target.value;
   }
-
   defaultButtonHandler() {
     this.localStorageService.save('defaultCurrency', this.defaultCurrency);
   }

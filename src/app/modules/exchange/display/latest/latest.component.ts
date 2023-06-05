@@ -13,9 +13,7 @@ export class LatestComponent {
   presentToBase = '';
   currencyLatest: any = {};
   $subs = new Subscription();
-
   constructor(private currencyService: CurrencyService) {}
-
   ngOnInit(): void {
     this.$subs.add(
       this.currencyService.presentCurrency$.subscribe((value) => {

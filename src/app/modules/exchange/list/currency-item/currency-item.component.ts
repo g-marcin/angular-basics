@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class CurrencyItemComponent {
   presentCurrencyLocal = '';
-  imageSrc = '';
+  flagSrc = '';
   @Input() element: any = [];
   currencyCode: string = this.element[0];
   @Input() rateElement: any = [];
@@ -20,7 +20,7 @@ export class CurrencyItemComponent {
   }
   ngOnInit() {
     this.presentCurrencyLocal = this.element[0];
-    this.imageSrc = `https://flagsapi.com/${this.presentCurrencyLocal.slice(
+    this.flagSrc = `https://flagsapi.com/${this.presentCurrencyLocal.slice(
       0,
       2
     )}/flat/64.png`;
