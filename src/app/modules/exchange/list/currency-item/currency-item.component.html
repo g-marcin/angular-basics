@@ -1,5 +1,8 @@
 <button class="currency__Button" (click)="emitValues()">
-  <span>{{ element[0] }}</span>
-  <span>{{ element[1] }}</span>
-  <span>{{ currencyRate }}</span>
+  <span class="code">{{ element[0] }}</span>
+  <span class="image">
+    <img src="{{ imageSrc }}" alt="" />
+  </span>
+  <span class="name">{{ element[1] }}</span>
+  <span class="rate">{{ currencyRate }}</span>
 </button>

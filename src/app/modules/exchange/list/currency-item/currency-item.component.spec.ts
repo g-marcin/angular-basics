@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CurrencyItemComponent } from './currency-item.component';
 
 describe('CurrencyItemComponent', () => {
@@ -8,7 +7,7 @@ describe('CurrencyItemComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CurrencyItemComponent]
+      declarations: [CurrencyItemComponent],
     });
     fixture = TestBed.createComponent(CurrencyItemComponent);
     component = fixture.componentInstance;

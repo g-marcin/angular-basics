@@ -11,7 +11,8 @@ export class ListComponent {
   currencyLatest: any = {};
   currencyNames = [['', '']];
   presentCurrency: string = '';
-  baseCurrency = '';
+  baseCurrency: string = '';
+
   constructor(
     private localStorageService: LocalStorageService,
     private currencyService: CurrencyService
