@@ -8,7 +8,7 @@ import { HistoryService } from 'src/app/services/HistoryService/history.service'
   styleUrls: ['./history.component.scss'],
 })
 export class HistoryComponent {
-  currencyHistory = {};
+  currencyHistory = [['', 0]];
   presentCurrency = '';
   baseCurrency = '';
   constructor(
@@ -37,12 +37,12 @@ export class HistoryComponent {
     this.historyService
       .getCurrencyHistory(this.baseCurrency)
       .subscribe((currencies) => {
-        const result = Object.entries(currencies.rates).map(
-          ([date, rates]: [any, any]) => {
+        const result = Object.entries(currencies.rates)
+          .map(([date, rates]: [any, any]) => {
             let presentCurrencyRate = rates[this.presentCurrency];
             return [date, presentCurrencyRate];
-          }
-        );
+          })
+          .reverse();
         this.currencyHistory = result;
       });
   }
