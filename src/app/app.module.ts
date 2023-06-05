@@ -16,6 +16,8 @@ import { AdminComponent } from './modules/admin/admin.component';
 import { DetailsComponent } from './modules/details/details.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
+import { HistoryItemComponent } from './modules/exchange/display/history/history-item/history-item.component';
+import { CountryFlagComponent } from './components/country-flag/country-flag.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { FooterComponent } from './layout/footer/footer.component';
     DetailsComponent,
     HeaderComponent,
     FooterComponent,
+    HistoryItemComponent,
+    CountryFlagComponent,
   ],
   imports: [
     BrowserModule,

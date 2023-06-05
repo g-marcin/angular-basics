@@ -10,6 +10,8 @@ export class LatestComponent {
   presentCurrency = '';
   baseCurrency = '';
   presentToBase = '';
+  currencyLatest: any = {};
+
   constructor(private currencyService: CurrencyService) {}
 
   ngOnInit(): void {}
@@ -17,11 +19,13 @@ export class LatestComponent {
   presentCurrencySubscription = this.currencyService.presentCurrency$.subscribe(
     (value) => {
       this.presentCurrency = value;
+      this.fetchCurrencyLatest();
     }
   );
   baseCurrencySubscription = this.currencyService.baseCurrency$.subscribe(
     (value) => {
       this.baseCurrency = value;
+      this.fetchCurrencyLatest();
     }
   );
   presentToBaseSubscription = this.currencyService.presentToBase$.subscribe(
@@ -29,4 +33,12 @@ export class LatestComponent {
       this.presentToBase = value;
     }
   );
+
+  fetchCurrencyLatest() {
+    this.currencyService
+      .getCurrencies(this.baseCurrency)
+      .subscribe((currencyLatest) => {
+        this.currencyLatest = currencyLatest;
+      });
+  }
 }
