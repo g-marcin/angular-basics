@@ -5,6 +5,7 @@
       [presentCurrency]="presentCurrency"
       [currencyRate]="getCurrencyRate(element)"
       (buttonClickEmitter)="currencyButtonHandler($event)"
+      *ngIf="element[0] !== baseCurrency"
     ></app-currency-item>
   </div>
 </div>

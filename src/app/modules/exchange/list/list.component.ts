@@ -8,7 +8,6 @@ import { Subscription } from 'rxjs';
 })
 export class ListComponent {
   currencyLatest: any = {};
-  currencyLatest2: any = {};
   currencyNames = [['', '']];
   presentCurrency: string = '';
   baseCurrency: string = '';
@@ -31,11 +30,6 @@ export class ListComponent {
     this.$subs.add(
       this.currencyService.presentCurrency$.subscribe((value) => {
         this.presentCurrency = value;
-      })
-    );
-    this.$subs.add(
-      this.currencyService.currencyLatest$.subscribe((value) => {
-        this.currencyLatest2 = value;
       })
     );
   }

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LatestComponent } from './latest.component';
 
 describe('LatestComponent', () => {
@@ -8,7 +7,7 @@ describe('LatestComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [LatestComponent]
+      declarations: [LatestComponent],
     });
     fixture = TestBed.createComponent(LatestComponent);
     component = fixture.componentInstance;
