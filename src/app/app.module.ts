@@ -19,7 +19,7 @@ import {
   HistoryItemComponent,
   LatestComponent,
   ListComponent,
-} from './modules';
+} from './pages';
 
 @NgModule({
   declarations: [
