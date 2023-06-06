@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { LocalStorageService } from '../LocalStorageService/local-storage.service';
 
 @Injectable({
@@ -9,6 +9,7 @@ import { LocalStorageService } from '../LocalStorageService/local-storage.servic
 export class CurrencyService {
   baseURL = 'https://api.frankfurter.app/';
   presentCurrency = 'USD';
+
   $sub: Subscription = new Subscription();
   private presentCurrencySubject: BehaviorSubject<string> =
     new BehaviorSubject<string>(
@@ -18,13 +19,16 @@ export class CurrencyService {
   private baseCurrencySubject: BehaviorSubject<string> =
     new BehaviorSubject<string>('AUD');
   baseCurrency$ = this.baseCurrencySubject.asObservable();
+  currencyLatest$: Observable<any> = new Observable();
 
   constructor(
     private httpClient: HttpClient,
     private localStorageService: LocalStorageService
   ) {}
 
-  onInit() {}
+  onInit() {
+    this.currencyLatest$ = this.getCurrencyLatest();
+  }
 
   getCurrencyNames() {
     return this.httpClient.get<{ [k: string]: string }>(

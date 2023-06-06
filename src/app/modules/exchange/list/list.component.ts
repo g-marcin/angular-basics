@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 })
 export class ListComponent {
   currencyLatest: any = {};
+  currencyLatest2: any = {};
   currencyNames = [['', '']];
   presentCurrency: string = '';
   baseCurrency: string = '';
@@ -18,9 +19,6 @@ export class ListComponent {
   ngOnInit(): void {
     this.$subs.add(
       this.currencyService.getCurrencyNames().subscribe((currencies) => {
-        if (!currencies) {
-          return;
-        }
         this.currencyNames = Object.entries(currencies);
       })
     );
@@ -35,12 +33,14 @@ export class ListComponent {
         this.presentCurrency = value;
       })
     );
+    this.$subs.add(
+      this.currencyService.currencyLatest$.subscribe((value) => {
+        this.currencyLatest2 = value;
+      })
+    );
   }
-  fetchCurrencyLatest() {
+  async fetchCurrencyLatest() {
     this.currencyService.getCurrencyLatest().subscribe((currencies) => {
-      if (!currencies) {
-        return;
-      }
       this.currencyLatest = currencies.rates;
     });
   }
