@@ -6,9 +6,20 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CountryFlagComponent } from './components/country-flag/country-flag.component';
-import { FooterComponent } from './layout/footer/footer.component';
-import { HeaderComponent } from './layout/header/header.component';
-import { AdminComponent, BaseComponent, CurrencyItemComponent, DetailsComponent, DisplayComponent, ExchangeComponent, HistoryComponent, HistoryItemComponent, LatestComponent, ListComponent } from './modules';
+import { FooterComponent, HeaderComponent } from './components';
+
+import {
+  AdminComponent,
+  BaseComponent,
+  CurrencyItemComponent,
+  DetailsComponent,
+  DisplayComponent,
+  ExchangeComponent,
+  HistoryComponent,
+  HistoryItemComponent,
+  LatestComponent,
+  ListComponent,
+} from './modules';
 
 @NgModule({
   declarations: [

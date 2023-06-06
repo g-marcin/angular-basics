@@ -12,31 +12,12 @@ interface currencyHistoryResponse extends Response {
 })
 export class HistoryService {
   baseURL = 'https://api.frankfurter.app/';
-  $sub: Subscription = new Subscription();
   private currencyHistorySubject: BehaviorSubject<any> = new BehaviorSubject({
     rates: { date: { '': 0 } },
   });
   currencyHistory$ = this.currencyHistorySubject.asObservable();
 
-  constructor(
-    private httpClient: HttpClient,
-    private currencyService: CurrencyService
-  ) {}
-
-  ngOnInit(): void {
-    const date = new Date();
-    const dateFrom = format(date, 'yyyy-MM-dd');
-    const dateTo = format(subDays(date, 12), 'yyyy-MM-dd');
-    this.currencyHistorySubject.next(
-      this.httpClient.get<currencyHistoryResponse>(
-        `${
-          this.baseURL
-        }${dateTo}..${dateFrom}?from=${this.currencyService.baseCurrency$.subscribe(
-          (baseCurrency) => baseCurrency
-        )}`
-      )
-    );
-  }
+  constructor(private httpClient: HttpClient) {}
 
   getCurrencyHistory(baseCurrency: string) {
     if (!baseCurrency) {
@@ -45,6 +26,7 @@ export class HistoryService {
     const date = new Date();
     const dateFrom = format(date, 'yyyy-MM-dd');
     const dateTo = format(subDays(date, 12), 'yyyy-MM-dd');
+
     return this.httpClient.get<currencyHistoryResponse>(
       `${this.baseURL}${dateTo}..${dateFrom}?from=${baseCurrency}`
     );

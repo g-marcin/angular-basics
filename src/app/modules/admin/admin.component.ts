@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CurrencyService } from 'src/app/services/CurrencyService/currency.service';
-import { LocalStorageService } from 'src/app/services/LocalStorageService/local-storage.service';
+import { CurrencyService } from 'src/app/services';
+import { LocalStorageService } from 'src/app/services';
 
 @Component({
   selector: 'app-admin',
