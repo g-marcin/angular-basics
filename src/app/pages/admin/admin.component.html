@@ -1,10 +1,25 @@
 <div class="display">
-  <select (change)="setSelectValue($event)" class="center">
-    <option *ngFor="let element of currencyCodes" value="{{ element[0] }}">
-      {{ element[0] }}
-      -
-      {{ element[1] }}
-    </option>
-  </select>
-  <button (click)="defaultButtonHandler()">Save</button>
+  <div>
+    <label>default present:</label>
+    <select (change)="setSelectValue($event)" class="center">
+      <option *ngFor="let element of currencyCodes" value="{{ element[0] }}">
+        {{ element[0] }}
+        -
+        {{ element[1] }}
+      </option>
+    </select>
+    <button (click)="defaultPresentCurrency()">Save</button>
+  </div>
+
+  <div>
+    <label>default base:</label>
+    <select (change)="setSelectValue($event)" class="center">
+      <option *ngFor="let element of currencyCodes" value="{{ element[0] }}">
+        {{ element[0] }}
+        -
+        {{ element[1] }}
+      </option>
+    </select>
+    <button (click)="defaultBaseCurrency()">Save</button>
+  </div>
 </div>

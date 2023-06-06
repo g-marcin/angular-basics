@@ -13,11 +13,13 @@ export class CurrencyService {
   $sub: Subscription = new Subscription();
   private presentCurrencySubject: BehaviorSubject<string> =
     new BehaviorSubject<string>(
-      this.localStorageService.get('defaultCurrency') || 'USD'
+      this.localStorageService.get('defaultPresent') || 'USD'
     );
   presentCurrency$ = this.presentCurrencySubject.asObservable();
   private baseCurrencySubject: BehaviorSubject<string> =
-    new BehaviorSubject<string>('AUD');
+    new BehaviorSubject<string>(
+      this.localStorageService.get('defaultBase') || 'AUD'
+    );
   baseCurrency$ = this.baseCurrencySubject.asObservable();
   currencyLatest$: Observable<any> = new Observable();
 

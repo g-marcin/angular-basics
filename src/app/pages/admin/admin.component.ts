@@ -22,7 +22,10 @@ export class AdminComponent {
   setSelectValue(e: any) {
     this.defaultCurrency = e.target.value;
   }
-  defaultButtonHandler() {
-    this.localStorageService.save('defaultCurrency', this.defaultCurrency);
+  defaultPresentCurrency() {
+    this.localStorageService.save('defaultPresent', this.defaultCurrency);
+  }
+  defaultBaseCurrency() {
+    this.localStorageService.save('defaultBase', this.defaultCurrency);
   }
 }
