@@ -33,7 +33,7 @@ export class ListComponent {
   }
   fetchCurrencyLatest() {
     this.currencyService
-      .getCurrencies(this.baseCurrency)
+      .getCurrencyLatest(this.baseCurrency)
       .subscribe((currencies) => {
         this.currencyLatest = currencies.rates;
       });

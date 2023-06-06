@@ -10,10 +10,11 @@ import { CurrencyService } from 'src/app/services/CurrencyService/currency.servi
 export class LatestComponent {
   presentCurrency = '';
   baseCurrency = '';
-  presentToBase = '';
   currencyLatest: any = {};
   $subs = new Subscription();
+
   constructor(private currencyService: CurrencyService) {}
+
   ngOnInit(): void {
     this.$subs.add(
       this.currencyService.presentCurrency$.subscribe((value) => {
@@ -27,19 +28,16 @@ export class LatestComponent {
         this.fetchCurrencyLatest();
       })
     );
-    this.$subs.add(
-      this.currencyService.presentToBase$.subscribe((value) => {
-        this.presentToBase = value;
-      })
-    );
   }
+
   fetchCurrencyLatest() {
     this.currencyService
-      .getCurrencies(this.baseCurrency)
+      .getCurrencyLatest(this.baseCurrency)
       .subscribe((currencyLatest) => {
         this.currencyLatest = currencyLatest;
       });
   }
+
   ngOnDestroy() {
     this.$subs.unsubscribe();
   }

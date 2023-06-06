@@ -11,17 +11,14 @@ export class CurrencyService {
 
   private presentCurrencySubject: BehaviorSubject<string> =
     new BehaviorSubject<string>(
-      this.localStorageService.get('defaultCurrency') || 'AUD'
+      this.localStorageService.get('defaultCurrency') || 'USD'
     );
-  public presentCurrency$ = this.presentCurrencySubject.asObservable();
+  presentCurrency$ = this.presentCurrencySubject.asObservable();
 
   private baseCurrencySubject: BehaviorSubject<string> =
-    new BehaviorSubject<string>('USD');
-  public baseCurrency$ = this.baseCurrencySubject.asObservable();
+    new BehaviorSubject<string>('AUD');
+  baseCurrency$ = this.baseCurrencySubject.asObservable();
 
-  private presentToBaseSubject: BehaviorSubject<string> =
-    new BehaviorSubject<string>('');
-  public presentToBase$ = this.presentToBaseSubject.asObservable();
   constructor(
     private httpClient: HttpClient,
     private localStorageService: LocalStorageService
@@ -34,12 +31,10 @@ export class CurrencyService {
     );
     return currencyNames;
   }
-  getCurrencies(baseCurrency: string) {
+  getCurrencyLatest(baseCurrency: string) {
     const currencyLatest = this.httpClient.get<any>(
       `${this.baseURL}latest?from=${baseCurrency}`
     );
-
-    this.presentToBaseSubject.next(this.presentCurrency);
     return currencyLatest;
   }
   async updatePresentCurrency(currencyCode: string) {

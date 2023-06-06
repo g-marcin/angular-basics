@@ -1,19 +1,17 @@
 .unstyled {
   list-style-type: none;
 }
-.currency__Button {
-  background: none;
-  list-style-type: none;
-  display: flex;
-  border: 1px solid black;
-  padding: 5px;
-  justify-content: space-between;
-  align-self: stretch;
-  margin: 5px auto;
-  font-size: 24px;
-  min-height: 60px;
-  width: 50%;
-}
+
 .currency__Button:hover {
   background: gainsboro;
+}
+.list {
+  border: 1px solid rgba(0, 0, 0, 0.603);
+  padding: 5px;
+  gap: 5px;
+  font-size: 20px;
+  align-items: center;
+  flex: 1;
+  width: 50%;
+  margin: auto;
 }

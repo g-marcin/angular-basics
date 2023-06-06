@@ -12,33 +12,32 @@ export class HistoryComponent {
   currencyHistory = [['', 0]];
   presentCurrency = '';
   baseCurrency = '';
-  $subs:Subscription = new Subscription()
+  $subs: Subscription = new Subscription();
   constructor(
     private historyService: HistoryService,
     private currencyService: CurrencyService
   ) {}
 
   ngOnInit(): void {
-  this.fetchHistoryData();
-   this.$subs.add(this.currencyService.presentCurrency$.subscribe(
-    (value) => {
-      this.presentCurrency = value;
-      this.fetchHistoryData();
-    }
-  )) 
-  this.$subs.add(  this.currencyService.baseCurrency$.subscribe(
-    (value) => {
-      this.baseCurrency = value;
-      this.fetchHistoryData();
-    }
-  )) 
+    this.$subs.add(
+      this.currencyService.presentCurrency$.subscribe((value) => {
+        this.presentCurrency = value;
+        this.fetchHistoryData();
+      })
+    );
+    this.$subs.add(
+      this.currencyService.baseCurrency$.subscribe((value) => {
+        this.baseCurrency = value;
+        this.fetchHistoryData();
+      })
+    );
   }
   fetchHistoryData() {
     this.historyService
       .getCurrencyHistory(this.baseCurrency)
       .subscribe((currencies) => {
         const result = Object.entries(currencies.rates)
-          .map(([date, rates]: [any, any]) => {
+          .map(([date, rates]: [string, { [k: string]: number }]) => {
             let presentCurrencyRate = rates[this.presentCurrency];
             return [date, presentCurrencyRate];
           })
@@ -46,7 +45,7 @@ export class HistoryComponent {
         this.currencyHistory = result;
       });
   }
-  ngOnDestroy(){
-    this.$subs.unsubscribe
+  ngOnDestroy() {
+    this.$subs.unsubscribe;
   }
 }
