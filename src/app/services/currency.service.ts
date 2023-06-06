@@ -9,8 +9,7 @@ import { LocalStorageService } from 'src/app/services';
 export class CurrencyService {
   baseURL = 'https://api.frankfurter.app/';
   presentCurrency = 'USD';
-
-  $sub: Subscription = new Subscription();
+  $subs: Subscription = new Subscription();
   private presentCurrencySubject: BehaviorSubject<string> =
     new BehaviorSubject<string>(
       this.localStorageService.get('defaultPresent') || 'USD'
@@ -21,7 +20,7 @@ export class CurrencyService {
       this.localStorageService.get('defaultBase') || 'AUD'
     );
   baseCurrency$ = this.baseCurrencySubject.asObservable();
-  currencyLatest$: Observable<any> = new Observable();
+  currencyLatest$: Observable<Response> = new Observable();
 
   constructor(
     private httpClient: HttpClient,
@@ -39,7 +38,7 @@ export class CurrencyService {
   }
   getCurrencyLatest() {
     let baseCurrency;
-    this.$sub.add(
+    this.$subs.add(
       this.baseCurrency$.subscribe((value) => {
         baseCurrency = value;
       })
@@ -53,5 +52,9 @@ export class CurrencyService {
   }
   updateBaseCurrency(currencyCode: string) {
     this.baseCurrencySubject.next(currencyCode);
+  }
+
+  ngOnDestroy() {
+    this.$subs.unsubscribe();
   }
 }
