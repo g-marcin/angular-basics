@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CurrencyService } from 'src/app/services/CurrencyService/currency.service';
+import { CurrencyService } from 'src/app/services';
 
 @Component({
   selector: 'app-base',
@@ -7,10 +7,11 @@ import { CurrencyService } from 'src/app/services/CurrencyService/currency.servi
   styleUrls: ['./base.component.scss'],
 })
 export class BaseComponent {
-  constructor(private currencyService: CurrencyService) {}
   baseCurrency = '';
   serviceCurrency = '';
   currencyCodes: any = [];
+
+  constructor(private currencyService: CurrencyService) {}
 
   ngOnInit(): void {
     this.currencyService.getCurrencyNames().subscribe((currencies) => {

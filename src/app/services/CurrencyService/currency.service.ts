@@ -8,7 +8,7 @@ import { LocalStorageService } from '../LocalStorageService/local-storage.servic
 })
 export class CurrencyService {
   baseURL = 'https://api.frankfurter.app/';
-  presentCurrency = '';
+  presentCurrency = 'USD';
   $sub: Subscription = new Subscription();
   private presentCurrencySubject: BehaviorSubject<string> =
     new BehaviorSubject<string>(
@@ -24,17 +24,23 @@ export class CurrencyService {
     private localStorageService: LocalStorageService
   ) {}
 
+  onInit() {}
+
   getCurrencyNames() {
-    const currencyNames = this.httpClient.get<{ [k: string]: string }>(
+    return this.httpClient.get<{ [k: string]: string }>(
       `${this.baseURL}currencies`
     );
-    return currencyNames;
   }
-  getCurrencyLatest(baseCurrency: string) {
-    const currencyLatest = this.httpClient.get<any>(
+  getCurrencyLatest() {
+    let baseCurrency;
+    this.$sub.add(
+      this.baseCurrency$.subscribe((value) => {
+        baseCurrency = value;
+      })
+    );
+    return this.httpClient.get<any>(
       `${this.baseURL}latest?from=${baseCurrency}`
     );
-    return currencyLatest;
   }
   updatePresentCurrency(currencyCode: string) {
     this.presentCurrencySubject.next(currencyCode);

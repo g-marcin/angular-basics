@@ -12,10 +12,15 @@ export class ListComponent {
   presentCurrency: string = '';
   baseCurrency: string = '';
   $subs: Subscription = new Subscription();
+
   constructor(private currencyService: CurrencyService) {}
+
   ngOnInit(): void {
     this.$subs.add(
       this.currencyService.getCurrencyNames().subscribe((currencies) => {
+        if (!currencies) {
+          return;
+        }
         this.currencyNames = Object.entries(currencies);
       })
     );
@@ -32,11 +37,12 @@ export class ListComponent {
     );
   }
   fetchCurrencyLatest() {
-    this.currencyService
-      .getCurrencyLatest(this.baseCurrency)
-      .subscribe((currencies) => {
-        this.currencyLatest = currencies.rates;
-      });
+    this.currencyService.getCurrencyLatest().subscribe((currencies) => {
+      if (!currencies) {
+        return;
+      }
+      this.currencyLatest = currencies.rates;
+    });
   }
   getCurrencyRate(element: any) {
     return this.currencyLatest[element[0]];

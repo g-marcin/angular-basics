@@ -31,11 +31,9 @@ export class LatestComponent {
   }
 
   fetchCurrencyLatest() {
-    this.currencyService
-      .getCurrencyLatest(this.baseCurrency)
-      .subscribe((currencyLatest) => {
-        this.currencyLatest = currencyLatest;
-      });
+    this.currencyService.getCurrencyLatest().subscribe((currencyLatest) => {
+      this.currencyLatest = currencyLatest;
+    });
   }
 
   ngOnDestroy() {
