@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { CurrencyService } from 'src/app/services/CurrencyService/currency.service';
+import { CurrencyService } from 'src/app/services';
 
 @Component({
   selector: 'app-latest',

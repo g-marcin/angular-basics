@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { CurrencyService } from 'src/app/services/CurrencyService/currency.service';
-import { HistoryService } from 'src/app/services/HistoryService/history.service';
+import { CurrencyService, HistoryService } from 'src/app/services';
 
 @Component({
   selector: 'app-history',

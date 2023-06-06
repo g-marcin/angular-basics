@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { format, subDays } from 'date-fns';
-import { Subscription, BehaviorSubject } from 'rxjs';
-import { CurrencyService } from '../CurrencyService';
+import { BehaviorSubject } from 'rxjs';
+import { CurrencyService } from 'src/app/services';
 
 interface currencyHistoryResponse extends Response {
   rates: { [date: string]: { [code: string]: number } };

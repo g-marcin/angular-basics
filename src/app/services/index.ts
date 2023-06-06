@@ -1,3 +1,3 @@
-export * from "./CurrencyService"
-export * from "./HistoryService"
-export * from "./LocalStorageService"
+export * from './currency.service';
+export * from './history.service';
+export * from './local-storage.service';

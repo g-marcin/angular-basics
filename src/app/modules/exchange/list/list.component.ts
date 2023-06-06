@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CurrencyService } from 'src/app/services/CurrencyService/currency.service';
+import { CurrencyService } from 'src/app/services';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-list',
@@ -34,7 +34,7 @@ export class ListComponent {
     );
   }
   async fetchCurrencyLatest() {
-    this.currencyService.getCurrencyLatest().subscribe((currencies) => {
+    this.currencyService.getCurrencyLatest().subscribe((currencies: any) => {
       this.currencyLatest = currencies.rates;
     });
   }
