@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { CurrencyService } from 'src/app/services';
 
 @Component({
@@ -9,7 +10,8 @@ import { CurrencyService } from 'src/app/services';
 export class BaseComponent {
   baseCurrency = '';
   serviceCurrency = '';
-  currencyCodes: any = [];
+  currencyCodes: [string, string][] = [['', '']];
+  $subs: Subscription = new Subscription();
 
   constructor(private currencyService: CurrencyService) {}
 
@@ -18,8 +20,13 @@ export class BaseComponent {
       this.currencyCodes = Object.entries(currencies);
     });
   }
+
   setSelectValue(e: any) {
     this.baseCurrency = e.target.value;
     this.currencyService.updateBaseCurrency(this.baseCurrency);
+  }
+
+  ngOnDestroy() {
+    this.$subs.unsubscribe();
   }
 }
