@@ -12,6 +12,7 @@ export class HistoryComponent {
   presentCurrency = '';
   baseCurrency = '';
   $subs: Subscription = new Subscription();
+
   constructor(
     private historyService: HistoryService,
     private currencyService: CurrencyService
@@ -24,6 +25,7 @@ export class HistoryComponent {
         this.fetchHistoryData();
       })
     );
+
     this.$subs.add(
       this.currencyService.baseCurrency$.subscribe((value) => {
         this.baseCurrency = value;
@@ -44,6 +46,7 @@ export class HistoryComponent {
         this.currencyHistory = result;
       });
   }
+
   ngOnDestroy() {
     this.$subs.unsubscribe;
   }
