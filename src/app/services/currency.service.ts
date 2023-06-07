@@ -1,55 +1,54 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { LocalStorageService } from 'src/app/services';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CurrencyService {
   baseURL = 'https://api.frankfurter.app/';
-  presentCurrency = 'USD';
   $subs: Subscription = new Subscription();
-  private presentCurrencySubject: BehaviorSubject<string> =
-    new BehaviorSubject<string>(
-      this.localStorageService.get('defaultPresent') || 'USD'
-    );
+  private presentCurrencySubject: BehaviorSubject<string> = new BehaviorSubject<string>(
+    this.localStorageService.get('defaultPresent') || 'USD',
+  );
   presentCurrency$ = this.presentCurrencySubject.asObservable();
-  private baseCurrencySubject: BehaviorSubject<string> =
-    new BehaviorSubject<string>(
-      this.localStorageService.get('defaultBase') || 'AUD'
-    );
+  private baseCurrencySubject: BehaviorSubject<string> = new BehaviorSubject<string>(
+    this.localStorageService.get('defaultBase') || 'AUD',
+  );
   baseCurrency$ = this.baseCurrencySubject.asObservable();
-  currencyLatest$: Observable<Response> = new Observable();
+  private currencyLatestSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  currencyLatest$ = this.currencyLatestSubject.asObservable();
 
-  constructor(
-    private httpClient: HttpClient,
-    private localStorageService: LocalStorageService
-  ) {}
+  constructor(private httpClient: HttpClient, private localStorageService: LocalStorageService) {
+    this.baseCurrency$.subscribe((baseCurrency) => {
+      this.httpClient.get<any>(`${this.baseURL}latest?from=${baseCurrency}`).subscribe((newCurrencyLatest) => {
+        this.currencyLatestSubject.next(newCurrencyLatest);
+      });
+    });
+  }
 
   onInit() {
     this.currencyLatest$ = this.getCurrencyLatest();
   }
 
   getCurrencyNames() {
-    return this.httpClient.get<{ [k: string]: string }>(
-      `${this.baseURL}currencies`
-    );
+    return this.httpClient.get<{ [k: string]: string }>(`${this.baseURL}currencies`);
   }
   getCurrencyLatest() {
     let baseCurrency;
     this.$subs.add(
       this.baseCurrency$.subscribe((value) => {
         baseCurrency = value;
-      })
+      }),
     );
-    return this.httpClient.get<any>(
-      `${this.baseURL}latest?from=${baseCurrency}`
-    );
+    return this.httpClient.get<any>(`${this.baseURL}latest?from=${baseCurrency}`);
   }
+
   updatePresentCurrency(currencyCode: string) {
     this.presentCurrencySubject.next(currencyCode);
   }
+
   updateBaseCurrency(currencyCode: string) {
     this.baseCurrencySubject.next(currencyCode);
   }

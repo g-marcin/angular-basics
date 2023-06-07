@@ -8,7 +8,7 @@ describe('ExchangeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ExchangeComponent]
+      declarations: [ExchangeComponent],
     });
     fixture = TestBed.createComponent(ExchangeComponent);
     component = fixture.componentInstance;

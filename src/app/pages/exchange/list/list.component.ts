@@ -19,24 +19,23 @@ export class ListComponent {
     this.$subs.add(
       this.currencyService.getCurrencyNames().subscribe((currencies) => {
         this.currencyNames = Object.entries(currencies);
-      })
+      }),
     );
     this.$subs.add(
       this.currencyService.baseCurrency$.subscribe((value) => {
         this.baseCurrency = value;
-        this.fetchCurrencyLatest();
-      })
+      }),
     );
     this.$subs.add(
       this.currencyService.presentCurrency$.subscribe((value) => {
         this.presentCurrency = value;
-      })
+      }),
     );
-  }
-  async fetchCurrencyLatest() {
-    this.currencyService.getCurrencyLatest().subscribe((currencies: any) => {
-      this.currencyLatest = currencies.rates;
-    });
+    this.$subs.add(
+      this.currencyService.currencyLatest$.subscribe((value) => {
+        this.currencyLatest = value;
+      }),
+    );
   }
   getCurrencyRate(element: any) {
     return this.currencyLatest[element[0]];
