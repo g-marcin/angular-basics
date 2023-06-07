@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LocalStorageService } from 'src/app/services';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,18 +18,20 @@ export class CurrencyService {
   private baseCurrencySubject: BehaviorSubject<string> = new BehaviorSubject<string>(this.initialBaseCurrency);
   baseCurrency$ = this.baseCurrencySubject.asObservable();
 
-  initialCurrencyLatest = null;
+  initialCurrencyLatest = { rates: { '': 0 } };
   private currencyLatestSubject: BehaviorSubject<any> = new BehaviorSubject<any>(this.initialCurrencyLatest);
   currencyLatest$ = this.currencyLatestSubject.asObservable();
 
   constructor(private httpClient: HttpClient, private localStorageService: LocalStorageService) {
-    this.$subs.add(
-      this.baseCurrency$.subscribe((baseCurrency) => {
-        this.httpClient.get<any>(`${this.baseURL}latest?from=${baseCurrency}`).subscribe((newCurrencyLatest) => {
-          this.currencyLatestSubject.next(newCurrencyLatest);
-        });
-      }),
-    );
+    this.baseCurrency$
+      .pipe(
+        switchMap((baseCurrency: any) => {
+          return this.httpClient.get<any>(`${this.baseURL}latest?from=${baseCurrency}`);
+        }),
+      )
+      .subscribe((newCurrencyLatest) => {
+        this.currencyLatestSubject.next(newCurrencyLatest);
+      });
   }
 
   onInit() {}
