@@ -28,21 +28,10 @@ export class CurrencyService {
     });
   }
 
-  onInit() {
-    this.currencyLatest$ = this.getCurrencyLatest();
-  }
+  onInit() {}
 
   getCurrencyNames() {
     return this.httpClient.get<{ [k: string]: string }>(`${this.baseURL}currencies`);
-  }
-  getCurrencyLatest() {
-    let baseCurrency;
-    this.$subs.add(
-      this.baseCurrency$.subscribe((value) => {
-        baseCurrency = value;
-      }),
-    );
-    return this.httpClient.get<any>(`${this.baseURL}latest?from=${baseCurrency}`);
   }
 
   updatePresentCurrency(currencyCode: string) {

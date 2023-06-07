@@ -2,7 +2,7 @@
   <div *ngFor="let element of currencyNames" class="list__Item">
     <app-currency-item
       [element]="element"
-      [currencyRate]="getCurrencyRate(element)"
+      [currencyRate]="currencyLatest.rates[element[0]]"
       [presentCurrency]="presentCurrency"
       *ngIf="element[0] !== baseCurrency"
       (buttonClickEmitter)="currencyButtonHandler(element)"

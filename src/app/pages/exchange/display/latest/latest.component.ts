@@ -20,28 +20,19 @@ export class LatestComponent {
     this.$subs.add(
       this.currencyService.presentCurrency$.subscribe((value) => {
         this.presentCurrency = value;
-        this.fetchCurrencyLatest();
-      })
+        this.displayedRate = this.currencyLatest[value];
+      }),
     );
     this.$subs.add(
       this.currencyService.baseCurrency$.subscribe((value) => {
         this.baseCurrency = value;
-        this.fetchCurrencyLatest();
-      })
+      }),
     );
-  }
-
-  fetchCurrencyLatest() {
-    let presentCurrency: string;
     this.$subs.add(
-      this.currencyService.presentCurrency$.subscribe((value) => {
-        presentCurrency = value;
-      })
+      this.currencyService.currencyLatest$.subscribe((currencyLatest) => {
+        this.currencyLatest = currencyLatest;
+      }),
     );
-    this.currencyService.getCurrencyLatest().subscribe((currencyLatest) => {
-      this.currencyLatest = currencyLatest;
-      this.displayedRate = currencyLatest.rates[presentCurrency || 'USD'];
-    });
   }
 
   ngOnDestroy() {
