@@ -1,0 +1,9 @@
+<div class="display">
+  <select (change)="setSelectValue($event)" class="center">
+    <option *ngFor="let element of currencyCodes" value="{{ element[0] }}">
+      {{ element[0] }}
+      -
+      {{ element[1] }}
+    </option>
+  </select>
+</div>
