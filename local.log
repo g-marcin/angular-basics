@@ -1,0 +1,9 @@
+
+
+(Not all processes could be identified, non-owned process info
+ will not be shown, you would have to be root to see it all.)
+Mon May 13 2024 22:38:28:948 GMT+0200 (CEST) -- [ERROR] Another instance of BrowserStack Binary is running with on your system with PID: 14388
+Mon May 13 2024 22:38:28:948 GMT+0200 (CEST) -- [ERROR] Please close it and try again
+Mon May 13 2024 22:38:28:948 GMT+0200 (CEST) -- [ERROR] SYS_CONFLICT:1001 https://browserstack.com/docs/local-testing/binary/errors/1001
+Mon May 13 2024 22:38:28:949 GMT+0200 (CEST) -- You can learn more about BrowserStack Binary flags by running ./BrowserStackLocal --help
+Mon May 13 2024 22:38:32:690 GMT+0200 (CEST) -- [INFO] Started the BrowserStack Binary server on 45691, PID: 14388
